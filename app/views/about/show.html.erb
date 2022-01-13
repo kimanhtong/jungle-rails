@@ -1,0 +1,42 @@
+<header class="page-header">
+<h1>About</h1>
+</header>
+<div class="well">
+<p> Before starting to contribute to Jungle, let's get a bird's eye view of how the functionality is implemented and what the data model looks like.
+The following are some good starting points to look at when exploring a new web app's code base.
+You should have the source code open in VS Code, and ideally two terminal tabs/windows open into the project directory (one for running the rails server and the other for running ad-hoc commands)
+</p>
+<h4> Exploring the Gemfile </h4>
+<p> Another good file to scan is the Gemfile, as it defines all the gem dependencies for a Ruby app.
+
+Open the Gemfile and skim it to understand what gem dependencies this project has.
+
+As you become familiar with the major and common gems this will allow you to get a sense of how certain features are implemented.
+
+That said, don't waste time checking what each of the dependencies actually is. This is simply a good reference file to come back to.
+</p>
+<h4> Exploring the Schema (Data) </h4>
+<p>
+Take a look at the db/schema.rb file.
+
+This file defines the schema of the database.
+
+The rake db:setup command, which in turn calls the rake db:schema:load command, uses this schema file to create the structure of our database from scratch. This is more efficient and reliable than running all the migrations from start to finish. However, database migrations are still needed for future changes to the database schema.
+</p>
+<h4>Exploring the Routes (Behaviour)</h4>
+<p> Now that we have an idea of the models in this app, good things to look at next are the URL endpoints. These describe the user's "functional interface": What actions they can take with the application.
+
+Remember that in a big project like this, when you know the name of a file you want to open but not its exact location, you can use the Cmd/Ctrl + P feature in VS Code to jump to a file by doing a fuzzy search on its name.
+
+Open the routes.rb file and examine its contents.
+
+This is new syntax but the design pattern is something you are familiar with: Defining routes that need to be handled by server-side code.
+
+To see what this declarative syntax yields in terms of endpoints, run the following command from within the project folder.
+
+bin/rake routes
+This prints a table that defines all the different URL endpoints (ex: GET /cart) and where they map to (or are dispatched to) when these HTTP requests come in.
+
+Start getting comfortable with the output as you will be using this rake command often, especially at first. After working with routes enough, one eventually gets comfortable deducing the output by just looking at the routes.rb file, but that will take some time.
+</p>
+</div>
