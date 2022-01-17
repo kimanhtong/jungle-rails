@@ -29,4 +29,11 @@ class ApplicationController < ActionController::Base
     cookies[:cart]
   end
 
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_username ||= @current_user.first_name + " " + @current_user.last_name if session[:user_id]
+    puts @current_username
+  end
+  helper_method :current_user
+
 end
