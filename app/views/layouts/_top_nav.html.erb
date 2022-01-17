@@ -49,14 +49,14 @@
         </li>
         <li>
           <% if session[:user_id] %>
-            <%= link_to @current_username, '' %>
+            <%= link_to current_user, '' %>
           <% else %>
-            <%= link_to 'Sign In', '/logout' %>
+            <%= link_to 'Sign In', '/login' %>
           <% end %>
         </li>
         <li>
           <% if session[:user_id] %>
-            <%= link_to 'Sign Out', '/login' %>
+            <%= link_to 'Sign Out', '/logout' %>
           <% else %>
             <%= link_to 'Sign Up', '/signup' %>
           <% end %>
