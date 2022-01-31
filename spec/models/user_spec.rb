@@ -48,4 +48,35 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    # examples for this class method here
+    it 'valid user can log in without error' do
+      @user_1 = User.create(first_name: "Cust", last_name: "Tomer", email: "a@b.c", password: "test", password_confirmation: "test")
+      @user_1.save
+      @user_2 = User.authenticate_with_credentials("a@b.c", "test")
+      expect(@user_2).to eq(@user_1)
+    end
+
+    it 'invalid user cannot log in' do
+      @user_3 = User.create(first_name: "Cust1", last_name: "Tomer1", email: "a@b.d", password: "test", password_confirmation: "test")
+      @user_3.save
+      @user_2 = User.authenticate_with_credentials("a@b.c", "test")
+      expect(@user_2).to be nil
+    end
+
+    it 'email with spaces only before and after the main text can still log in' do
+      @user_1 = User.create(first_name: "Cust", last_name: "Tomer", email: "a@b.c", password: "test", password_confirmation: "test")
+      @user_1.save
+      @user_2 = User.authenticate_with_credentials("  a@b.c  ", "test")
+      expect(@user_2).to eq(@user_1)
+    end
+
+    it 'email with wrong case but same word can still log in' do
+      @user_1 = User.create(first_name: "Cust", last_name: "Tomer", email: "A@b.c", password: "test", password_confirmation: "test")
+      @user_1.save
+      @user_2 = User.authenticate_with_credentials("A@B.C", "test")
+      expect(@user_2).to eq(@user_1)
+    end
+  end
 end
